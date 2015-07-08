@@ -38,8 +38,8 @@ router.get('/', function(req, res){
   res.send("Welcome to Six Degrees of Kevin Bacon!");
 });
 
-router.get('/test', function(req, res){
-  con.query("Select * from Actors where ActorId = 1", function(err, rows, fields){
+router.get('/:FirstName/:LastName', function(req, res){
+  con.query("Select * from Actors where FirstName = ' " + req.params.FirstName + "' and LastName = " + req.params.LastName + "'", function(err, rows, fields){
     if (!err){
       res.json(rows);
     } else {
