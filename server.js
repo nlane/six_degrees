@@ -40,7 +40,7 @@ router.get('/', function(req, res){
 
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
   var Actors
-  con.query("Select * from Actors where (FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
+  con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
     if (!err){
       Actors = rows;
       res.send(rows);
@@ -49,6 +49,7 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
     }
   });
 });
+
 
 server.listen(PORT || 3000, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();
