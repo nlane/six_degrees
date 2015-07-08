@@ -39,7 +39,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/:FirstName/:LastName', function(req, res){
-  con.query("Select * from Actors where FirstName = ' " + req.params.FirstName + "' and LastName = " + req.params.LastName + "'", function(err, rows, fields){
+  con.query("Select * from Actors where FirstName = ' " + req.params.FirstName + "' and LastName = '" + req.params.LastName + "'", function(err, rows, fields){
     if (!err){
       res.json(rows);
     } else {
