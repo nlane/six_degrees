@@ -39,23 +39,15 @@ router.get('/', function(req, res){
 });
 
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
-  var Actor1;
-  var Actor2;
-  con.query("Select ActorId from Actors where FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "'", function(err, rows, fields){
+  var Actors
+  con.query("Select * from Actors where (FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
     if (!err){
-      Actor1 = rows;
+      Actors = rows;
+      res.send(rows);
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
   });
-  con.query("Select ActorId from Actors where FirstName = ' " + req.params.FirstName2 + "' and LastName = '" + req.params.LastName2 + "'", function(err, rows, fields){
-   if (!err){
-    Actor2 = rows;
-   } else {
-    res.json({error: "Make sure you typed the name correctly! :)"});
-   }
-  });
-  res.json({Actor1Id:Actor1, Actor2Id:Actor2});
 });
 
 server.listen(PORT || 3000, process.env.IP || "0.0.0.0", function(){
