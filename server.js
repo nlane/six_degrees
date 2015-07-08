@@ -41,7 +41,7 @@ router.get('/', function(req, res){
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
   con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
     if (!err){
-      res.send(rows["ActorID"]);
+      res.send(rows.ActorId);
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
