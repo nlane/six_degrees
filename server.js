@@ -35,14 +35,14 @@ con.connect();
 
 
 router.get('/', function(req, res){
-  res.send("Welcome to Six Degrees of Kevin Bacon!");
+  res.send("Welcome to Six Degrees of Kevin Bacon!!!!!!");
 });
 
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
   var actors = [];
   con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
     if (!err){
-        res.send(rows[0]);
+        res.send(rows["ActorId"]);
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
