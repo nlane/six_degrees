@@ -45,7 +45,7 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
        rows.forEach(function(row){
             actors.push({ActorId:row.ActorId});
         });
-        res.send(fields);
+        res.send(rows.fields);
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
