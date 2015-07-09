@@ -94,9 +94,9 @@ def getPath():
         current = discnodes[current.parentindex] #move to parent
         
         while (current.parentindex != -1):
-            cur.execute("select firstname, lastname from ActorsTest where id = %s", current.actorid)
+            cur.execute("select FirstName, LastName from Actors where id = %s", current.actorid)
             name = cur.fetchall()
-            cur.execute("select MovieTitle from Movies where MovieId = %s", current.movieid)
+            cur.execute("select Title from Movies where MovieId = %s", current.movieid)
             movie = cur.fetchall()
             print('the actor '  + str(name[0][0]) + ' ' + str(name[0][1]) + ' who was in ' + str(movie[0][0]) + ' with ')
             current = discnodes[current.parentindex] #move to parent
