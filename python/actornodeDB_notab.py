@@ -116,9 +116,13 @@ discnodes.append(ActorNode(sys.argv[1], -1, -1))
 #findNode(sys.argv[2])
 #mycon.commit()
 
-print(sys.argv[1])
-print(sys.argv[2])
+cur.execute("select FirstName, LastName from Actors where ActorId = %s", sys.argv[1]);
+name1 = cur.fetchall()
+cur.execute("select FirstName, LastName from Actors where ActorId = %s", sys.argv[2]);
+name2 = cur.fetchall()
 
+print(name1[0][0])
+print(name2[0][0])
 
 if mycon:
    mycon.close()
