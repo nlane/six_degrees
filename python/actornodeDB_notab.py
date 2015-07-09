@@ -71,6 +71,8 @@ def findNode(target):
                     discnodes.append(n) #also add movie
                     #print('added ' + n.idString() + ' via ' + currentnode.idString())
         counter = counter + 1
+    if (not found) :
+        print("Actors not connected to database, sorry D:")
 
 
 
