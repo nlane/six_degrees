@@ -29,12 +29,12 @@ def nodesContains(list, value):
 #return the actors who have shared any movie with a given actor
 def getNeighbors(sourceid, sourceindex):
     #select an actorid ONCE
-    cur.execute("select MovieId from ActToMov where ActorId = %s", sourceid)
+    cur.execute("select MovieId from BabyRel where ActorId = %s", sourceid)
     #cur.execute("select * from MoviesTest where year = %s", '2005') #heyyyyyyy look we can compare year as a string!
     movies = cur.fetchall()
     neighbors = []
     for m in movies:
-        cur.execute("select ActorId from ActToMov where MovieId = %s", m[0])
+        cur.execute("select ActorId from BabyRel where MovieId = %s", m[0])
         cast = cur.fetchall() 
         for c in cast:
             neighbors.append(ActorNode(c[0], sourceindex, m[0]))
@@ -113,16 +113,14 @@ discnodes.append(ActorNode(sys.argv[1], -1, -1))
 
 #print(getNeighbors(2,1))
 
-#findNode(sys.argv[2])
+findNode(sys.argv[2])
 #mycon.commit()
 
-cur.execute("select FirstName, LastName from Actors where ActorId = %s", sys.argv[1]);
-name1 = cur.fetchall()
-cur.execute("select FirstName, LastName from Actors where ActorId = %s", sys.argv[2]);
-name2 = cur.fetchall()
+# cur.execute("select FirstName, LastName from Actors where ActorId = %s", sys.argv[1]);
+# name1 = cur.fetchall()
+# cur.execute("select FirstName, LastName from Actors where ActorId = %s", sys.argv[2]);
+# name2 = cur.fetchall()
 
-print(name1[0][0])
-print(name2[0][0])
 
 if mycon:
    mycon.close()
