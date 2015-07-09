@@ -40,7 +40,7 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
           // scriptPath: 'path/to/my/scripts',
           args: [actors[0], actors[1]]
         };
-        PythonShell.run('somescript.py', options, function (err, results) {
+        PythonShell.run('actornodeDB_notab.py', options, function (err, results) {
           if (err) throw err;
           res.send(results);
         });

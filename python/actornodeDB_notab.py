@@ -113,8 +113,12 @@ discnodes.append(ActorNode(sys.argv[1], -1, -1))
 
 #print(getNeighbors(2,1))
 
-findNode(sys.argv[2])
-mycon.commit()
+#findNode(sys.argv[2])
+#mycon.commit()
+
+print(sys.argv[1])
+print(sys.argv[2])
+
 
 if mycon:
    mycon.close()
