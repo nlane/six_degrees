@@ -1,7 +1,7 @@
 var http = require('http');
 var express = require('express');
 var mysql = require('mysql');
-// var PythonShell = require('python-shell');
+var PythonShell = require('python-shell');
 
 var router = express();
 var server = http.createServer(router);
@@ -19,33 +19,32 @@ var con = mysql.createConnection({
 
 con.connect();
 
-// var options = {
-//   mode: 'text',
-//   // pythonPath: 'path/to/python',
-//   // pythonOptions: ['-u'],
-//   // scriptPath: 'path/to/my/scripts',
-//   args: ['5']
-// };
- 
-// PythonShell.run('somescript.py', options, function (err, results) {
-//   if (err) throw err;
-//   // results is an array consisting of messages collected during execution 
-//   console.log('results: %j', results);
-// });
-
 
 router.get('/', function(req, res){
-  res.send("Welcome to Six Degrees of Kevin Bacon!!!!");
+  res.send("Welcome to Six Degrees of Kevin Bacon :)!");
 });
 
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
   var actors = [];
-  con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
+  con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 
+            + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " 
+            + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
     if (!err){
        rows.forEach(function(row){
-            actors.push({ActorId:row["ActorId"]});
+            actors.push(row["ActorId"]);
         });
-        res.send(actors);
+        var options = {
+          mode: 'text',
+          // pythonPath: 'path/to/python',
+          // pythonOptions: ['-u'],
+          // scriptPath: 'path/to/my/scripts',
+          args: [actors[0], actors[1]]
+        };
+        PythonShell.run('actornodeDB_notab.py', options, function (err, results) {
+          if (err) throw err;
+          // results is an array consisting of messages collected during execution 
+          console.log('results: %j', results);
+        });
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
@@ -55,7 +54,9 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
 router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
   var year = req.params.year;
   var actors = [];
-  con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
+  con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 +
+            "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " 
+            + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
     if (!err){
        rows.forEach(function(row){
             actors.push({ActorId:row["ActorId"]});
