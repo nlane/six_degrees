@@ -33,6 +33,7 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
        rows.forEach(function(row){
             actors.push(row["ActorId"]);
         });
+        res.send(actors);
         var options = {
           mode: 'text',
           // pythonPath: 'path/to/python',
@@ -44,7 +45,6 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
           if (err) throw err;
           // results is an array consisting of messages collected during execution 
           console.log('results: %j', results);
-          res.send(results);
         });
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
