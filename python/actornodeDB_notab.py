@@ -49,7 +49,7 @@ def findNode(target):
     found = False
     while (counter < len(discnodes) and not found):
         currentnode = discnodes[counter]
-        print('currentnode = ' + currentnode.idString())
+        #print('currentnode = ' + currentnode.idString())
         if (currentnode.actorid == target):
             #print('target reached: ' + target)
             found = True
@@ -62,14 +62,14 @@ def findNode(target):
                     #node already discovered
                     pass
                 elif (n.actorid == target):
-                    print('target found via ' + currentnode.idString())
+                    #print('target found via ' + currentnode.idString())
                     discnodes.append(n)#save the INDEX at which the parent is
                     found = True
                     getPath()
                     break
                 else:
                     discnodes.append(n) #also add movie
-                    print('added ' + n.idString() + ' via ' + currentnode.idString())
+                    #print('added ' + n.idString() + ' via ' + currentnode.idString())
         counter = counter + 1
     if (not found) :
         print("Actors not connected to database, sorry D:")
