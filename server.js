@@ -21,12 +21,9 @@ con.connect();
 
 
 router.get('/', function(req, res){
-  res.send("Welcome to Six Degrees of Kevin Bacon :)!");
+  res.send("Welcome to Six Degrees of Kevin Bacon - Danielle, Kalina, and Natalie!");
 });
 
-router.get('/test/:variable', function(req, res){
-  res.send(req.params.variable == 0);
-});
 
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
   var actors = [];
