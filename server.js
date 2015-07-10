@@ -57,8 +57,6 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
 router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
   var year = req.params.year;
   var sending = [];
-  sending.push(year);
-  sending.push("Year");
   con.query("Select ActorId from Actors where (FirstName = ' " + req.params.Actor1F +
             "' and LastName = '" + req.params.Actor1L + "') or (FirstName= ' " 
             + req.params.Actor2F + "' and LastName= '" + req.params.Actor2L + "')", function(err, rows, fields){
@@ -66,6 +64,8 @@ router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, re
        rows.forEach(function(row){
             sending.push(row["ActorId"]);
         });
+        sending.push(year);
+        sending.push("Year");
         res.send(sending);
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
