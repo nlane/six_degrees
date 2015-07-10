@@ -128,7 +128,7 @@ directorid = 0
 writerid = 0
 year = 0
 
-if(sys.argv[3]!= None):
+if(len(sys.argv) == 5):
 	if(sys.argv[4] == "Director"):
 		directorid = int(sys.argv[3])
 	elif(sys.argv[4] == "Writer"):
