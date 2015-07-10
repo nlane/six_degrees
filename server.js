@@ -89,8 +89,8 @@ router.get('/director/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L',
 router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
    con.query("select ActorId from Actors A where (A.FirstName =' " + req.params.Actor1F 
             + "' and A.LastName='" + req.params.Actor1L + "') or (A.FirstName=' " + req.params.Actor2F
-            + "' and A.LastName = '" + req.params.Actor2L + "'); select WriterId from Writers W where W.FirstName=' " 
-            + req.params.FirstName + "' and W.LastName='" + req.params.LastName + "';", function(err, rows, fields){
+            + "' and A.LastName = '" + req.params.Actor2L + "' union select WriterId from Writers W where W.FirstName=' " 
+            + req.params.FirstName + "' and W.LastName='" + req.params.LastName + "'", function(err, rows, fields){
     if (!err){
       res.send(rows);
     } else {
@@ -103,7 +103,7 @@ router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', f
 
 
 
-// select ActorId from Actors A where (A.FirstName = " Kevin (I)" and A.LastName="Bacon") or (A.FirstName=" Travis" and A.LastName = "Bacon"); select WriterId from Writers W where W.FirstName=" Tim (I)" and W.LastName="Burton";
+// select ActorId from Actors A where (A.FirstName = " Kevin (I)" and A.LastName="Bacon") or (A.FirstName=" Travis" and A.LastName = "Bacon") union select WriterId from Writers W where W.FirstName=" Tim (I)" and W.LastName="Burton";
 
 
 
