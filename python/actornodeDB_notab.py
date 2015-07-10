@@ -45,6 +45,7 @@ def getNeighbors(sourceid, sourceindex):
 #find the target(actorid) via breadth first search from the source
 #mark nodes [actorid][parent_index][movieid_shared_w_parent]
 def findNode(target):
+    target = int(target)
     counter = 0
     found = False
     while (counter < len(discnodes) and not found):
@@ -62,7 +63,7 @@ def findNode(target):
                     #node already discovered
                     pass
                 elif (n.actorid == target):
-                    #print('target found via ' + currentnode.idString())
+                    print('target found via ' + currentnode.idString())
                     discnodes.append(n)#save the INDEX at which the parent is
                     found = True
                     getPath()
