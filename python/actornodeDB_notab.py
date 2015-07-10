@@ -45,7 +45,6 @@ def getNeighbors(sourceid, sourceindex):
 #find the target(actorid) via breadth first search from the source
 #mark nodes [actorid][parent_index][movieid_shared_w_parent]
 def findNode(target):
-    target = int(target)
     counter = 0
     found = False
     while (counter < len(discnodes) and not found):
@@ -112,11 +111,11 @@ def getPath():
 #start by adding the source (values = -1 for root)
 #node: [actorid][parent_index][movieid_shared_w_parent]
 discnodes = []
-discnodes.append(ActorNode(sys.argv[1], -1, -1))
+discnodes.append(ActorNode(int(sys.argv[1]), -1, -1))
 
 #print(getNeighbors(2,1))
 
-findNode(sys.argv[2])
+findNode(int(sys.argv[2]))
 #mycon.commit()
 
 # cur.execute("select FirstName, LastName from Actors where ActorId = %s", sys.argv[1]);
