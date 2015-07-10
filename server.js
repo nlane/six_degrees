@@ -36,9 +36,6 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
         });
         var options = {
           mode: 'text',
-          // pythonPath: 'path/to/python',
-          // pythonOptions: ['-u'],
-          // scriptPath: 'path/to/my/scripts',
           args: [actors[0], actors[1]]
         };
         PythonShell.run('findActorScript.py', options, function (err, results) {
@@ -65,9 +62,6 @@ router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, re
         sending.push("Year");
         var options = {
           mode: 'text',
-          // pythonPath: 'path/to/python',
-          // pythonOptions: ['-u'],
-          // scriptPath: 'path/to/my/scripts',
           args: [sending[0], sending[1], sending[2], sending[3]]
         };
         PythonShell.run('findActorScript.py', options, function (err, results) {
@@ -93,9 +87,6 @@ router.get('/director/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L',
         sending.push("Director");
         var options = {
           mode: 'text',
-          // pythonPath: 'path/to/python',
-          // pythonOptions: ['-u'],
-          // scriptPath: 'path/to/my/scripts',
           args: [sending[0], sending[1], sending[2], sending[3]]
         };
         PythonShell.run('findActorScript.py', options, function (err, results) {
@@ -121,9 +112,6 @@ router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', f
         sending.push("Writer");
         var options = {
           mode: 'text',
-          // pythonPath: 'path/to/python',
-          // pythonOptions: ['-u'],
-          // scriptPath: 'path/to/my/scripts',
           args: [sending[0], sending[1], sending[2], sending[3]]
         };
         PythonShell.run('findActorScript.py', options, function (err, results) {
@@ -135,14 +123,6 @@ router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', f
     }
   });
 });
-
-//select ActorId, WriterId from Actors A, Writers W where (A.FirstName = " Kevin (I)" and A.LastName="Bacon") or (A.FirstName=" Travis" and A.LastName = "Bacon") and (W.FirstName=" Tim (I)" and W.LastName="Burton");
-
-
-
-// select ActorId from Actors A where (A.FirstName = " Kevin (I)" and A.LastName="Bacon") or (A.FirstName=" Travis" and A.LastName = "Bacon") union select WriterId from Writers W where W.FirstName=" Tim (I)" and W.LastName="Burton";
-
-
 
 
 server.listen(PORT || 3000, process.env.IP || "0.0.0.0", function(){
