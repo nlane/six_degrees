@@ -24,6 +24,10 @@ router.get('/', function(req, res){
   res.send("Welcome to Six Degrees of Kevin Bacon :)!");
 });
 
+router.get('/test/:variable', function(req, res){
+  res.send(req.params.variable == 0);
+});
+
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
   var actors = [];
   con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 
@@ -96,6 +100,53 @@ router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', f
     }
   });
 });
+
+
+router.get('/year/:year/writer/:WriterF/:WriterL/director/:DirectorF/:DirectorL/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
+  // if ((req.params.year == 0) && (req.params.writer == 0) && (req.params.director == 0)){
+  //     var actors = [];
+  //   con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 
+  //           + "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " 
+  //           + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
+  //   if (!err){
+  //     rows.forEach(function(row){
+  //           actors.push(row["ActorId"]);
+  //       });
+  //       var options = {
+  //         mode: 'text',
+  //         // pythonPath: 'path/to/python',
+  //         // pythonOptions: ['-u'],
+  //         // scriptPath: 'path/to/my/scripts',
+  //         args: [actors[0], actors[1]]
+  //       };
+  //       PythonShell.run('actornodeDB_notab.py', options, function (err, results) {
+  //         if (err) throw err;
+  //         res.send(results);
+  //       });
+  //   } else {
+  //     res.json({error: "Make sure you typed the name correctly! :)"});
+  //   }
+  // });
+  // }
+  // else if ((req.params.year == 0) && (req.params.writer == 0) && (req.params.director != 0)){
+  // }
+  // else if ((req.params.year == 0) && (req.params.writer != 0) && (req.params.director == 0)){
+  // }
+  // else if ((req.params.year != 0) && (req.params.writer == 0) && (req.params.director == 0)){
+  // }
+  // con.query("Select WriterId, ActorId from Writers W natural join Actors A where W.FirstName = ' " 
+  //             + FirstName + "' and W.LastName = '" + LastName + "' and ((A.FirstName=' " + req.params.Actor1F 
+  //             + "' and A.LastName='" + req.params.Actor1L +"') or (A.FirstName=' " + req.params.Actor2F 
+  //             + "', A.LastName='" + req.params.Actor2L + "'))", function(err, rows, fields){
+  //   if (!err){
+  //     res.send(rows);
+  //   } else {
+  //     res.json({error: "Make sure you typed the name correctly! :)"});
+  //   }
+  // });
+});
+
+
 
 server.listen(PORT || 3000, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();
