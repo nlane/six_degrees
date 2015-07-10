@@ -44,7 +44,7 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
           // scriptPath: 'path/to/my/scripts',
           args: [actors[0], actors[1]]
         };
-        PythonShell.run('actornodeDB_notab.py', options, function (err, results) {
+        PythonShell.run('findActorScript.py', options, function (err, results) {
           if (err) throw err;
           res.send(results);
         });
@@ -66,7 +66,17 @@ router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, re
         });
         sending.push(year);
         sending.push("Year");
-        res.send(sending);
+        var options = {
+          mode: 'text',
+          // pythonPath: 'path/to/python',
+          // pythonOptions: ['-u'],
+          // scriptPath: 'path/to/my/scripts',
+          args: [sending[0], sending[1], sending[2], sending[3]]
+        };
+        PythonShell.run('findActorScript.py', options, function (err, results) {
+          if (err) throw err;
+          res.send(results);
+        });
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
@@ -84,7 +94,17 @@ router.get('/director/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L',
             sending.push(row["ActorId"]);
         });
         sending.push("Director");
-        res.send(sending);
+        var options = {
+          mode: 'text',
+          // pythonPath: 'path/to/python',
+          // pythonOptions: ['-u'],
+          // scriptPath: 'path/to/my/scripts',
+          args: [sending[0], sending[1], sending[2], sending[3]]
+        };
+        PythonShell.run('findActorScript.py', options, function (err, results) {
+          if (err) throw err;
+          res.send(results);
+        });
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
@@ -102,7 +122,17 @@ router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', f
             sending.push(row["ActorId"]);
         });
         sending.push("Writer");
-        res.send(sending);
+        var options = {
+          mode: 'text',
+          // pythonPath: 'path/to/python',
+          // pythonOptions: ['-u'],
+          // scriptPath: 'path/to/my/scripts',
+          args: [sending[0], sending[1], sending[2], sending[3]]
+        };
+        PythonShell.run('findActorScript.py', options, function (err, results) {
+          if (err) throw err;
+          res.send(results);
+        });
     } else {
       res.json({error: "Make sure you typed the name correctly! :)"});
     }
