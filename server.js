@@ -21,7 +21,7 @@ con.connect();
 
 
 router.get('/', function(req, res){
-  res.send("Welcome to Six Degrees of Kevin Bacon - Danielle, Kalina, and Natalie!");
+  res.send("Welcome to Six Degrees of Kevin Bacon by Danielle, Kalina, and Natalie!");
 });
 
 

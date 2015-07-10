@@ -27,19 +27,19 @@ def nodesContains(list, value):
 #return the actors who have shared any movie with a given actor
 def getNeighbors(sourceid, sourceindex):
     if(directorid !=0):
-    	cur.execute("select ActToMovIndex.MovieId from ActToMovIndex join DirectorToMovie on ActToMovIndex.MovieId=DirectorToMovie.MovieId where DirectorToMovie.DirectorId = %s and ActToMovIndex.ActorId = %s", (directorid, sourceid))
+    	cur.execute("select ActToMov.MovieId from ActToMov join DirectorToMovie on ActToMov.MovieId=DirectorToMovie.MovieId where DirectorToMovie.DirectorId = %s and ActToMov.ActorId = %s", (directorid, sourceid))
     elif(writerid !=0):
-    	cur.execute("select ActToMovIndex.MovieId from ActToMovIndex join WriterToMovie on ActToMovIndex.MovieId=WriterToMovie.MovieId where WriterToMovie.WriterId = %s and ActToMovIndex.ActorId = %s", (writerid, sourceid))    
+    	cur.execute("select ActToMov.MovieId from ActToMov join WriterToMovie on ActToMov.MovieId=WriterToMovie.MovieId where WriterToMovie.WriterId = %s and ActToMov.ActorId = %s", (writerid, sourceid))    
     elif(year != 0):
     	yearend = year + 9
-    	cur.execute("select ActToMovIndex.MovieId from ActToMovIndex join Movies on ActToMovIndex.MovieId = Movies.MovieId where ActToMovIndex.ActorId = %s and Movies.Year between %s and %s", (sourceid, year, yearend))
+    	cur.execute("select ActToMov.MovieId from ActToMov join Movies on ActToMov.MovieId = Movies.MovieId where ActToMov.ActorId = %s and Movies.Year between %s and %s", (sourceid, year, yearend))
     else:
-    	cur.execute("select MovieId from ActToMovIndex where ActorId = %s", sourceid)
+    	cur.execute("select MovieId from ActToMov where ActorId = %s", sourceid)
     
     movies = cur.fetchall()
     neighbors = []
     for m in movies:
-        cur.execute("select ActorId from ActToMovIndex where MovieId = %s", m[0])
+        cur.execute("select ActorId from ActToMov where MovieId = %s", m[0])
         cast = cur.fetchall() 
         for c in cast:
             neighbors.append(ActorNode(c[0], sourceindex, m[0]))
@@ -99,7 +99,7 @@ def getPath():
         
         cur.execute("select FirstName, LastName from Actors where ActorId = %s", current.actorid)
         name = cur.fetchall()
-        cur.execute("select MovieId from Movies where MovieId = %s", current.movieid)
+        cur.execute("select Title from Movies where MovieId = %s", current.movieid)
         movie = cur.fetchall()
  
         print('Your chosen actor '  + str(name[0][0]) + ' ' + str(name[0][1]) + ' was in ' + str(movie[0][0]) + ' with ')
