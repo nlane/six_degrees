@@ -29,12 +29,12 @@ def nodesContains(list, value):
 #return the actors who have shared any movie with a given actor
 def getNeighbors(sourceid, sourceindex):
     #select an actorid ONCE
-    cur.execute("select MovieId from BabyRel where ActorId = %s", sourceid)
+    cur.execute("select MovieId from ActToMov where ActorId = %s", sourceid)
     #cur.execute("select * from MoviesTest where year = %s", '2005') #heyyyyyyy look we can compare year as a string!
     movies = cur.fetchall()
     neighbors = []
     for m in movies:
-        cur.execute("select ActorId from BabyRel where MovieId = %s", m[0])
+        cur.execute("select ActorId from ActToMov where MovieId = %s", m[0])
         cast = cur.fetchall() 
         for c in cast:
             neighbors.append(ActorNode(c[0], sourceindex, m[0]))
