@@ -59,9 +59,9 @@ router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, re
   var sending = [];
   sending.push(year);
   sending.push("Year");
-  con.query("Select ActorId from Actors where (FirstName = ' " + req.params.FirstName1 +
-            "' and LastName = '" + req.params.LastName1 + "') or (FirstName= ' " 
-            + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "')", function(err, rows, fields){
+  con.query("Select ActorId from Actors where (FirstName = ' " + req.params.Actor1F +
+            "' and LastName = '" + req.params.Actor1L + "') or (FirstName= ' " 
+            + req.params.Actor2F + "' and LastName= '" + req.params.Actor2L + "')", function(err, rows, fields){
     if (!err){
        rows.forEach(function(row){
             sending.push(row["ActorId"]);
