@@ -89,7 +89,7 @@ router.get('/director/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L',
 router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
    con.query("select ActorId from Actors A where (A.FirstName =' " + req.params.Actor1F 
             + "' and A.LastName='" + req.params.Actor1L + "') or (A.FirstName=' " + req.params.Actor2F
-            + "' and A.LastName = '" + req.params.Actor2L + "' union select WriterId from Writers W where W.FirstName=' " 
+            + "' and A.LastName = '" + req.params.Actor2L + "') union select WriterId from Writers W where W.FirstName=' " 
             + req.params.FirstName + "' and W.LastName='" + req.params.LastName + "'", function(err, rows, fields){
     if (!err){
       res.send(rows);
