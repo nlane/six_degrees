@@ -27,9 +27,9 @@ router.get('/', function(req, res){
 
 router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
   var actors = [];
-  con.query("Select ActorId from Actors where FirstName = ' " + req.params.FirstName1 
-            + "' and LastName = '" + req.params.LastName1 + "' limit one union select ActorId from Actors where FirstName= ' " 
-            + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "' limit one", function(err, rows, fields){
+  con.query("(select ActorId from Actors where FirstName = ' " + req.params.FirstName1 
+            + "' and LastName = '" + req.params.LastName1 + "' limit 1) union (select ActorId from Actors where FirstName= ' " 
+            + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "' limit 1)", function(err, rows, fields){
     if (!err && (rows.length === 2)){
        rows.forEach(function(row){
             actors.push(row["ActorId"]);
@@ -51,9 +51,9 @@ router.get('/:FirstName1/:LastName1/:FirstName2/:LastName2', function(req, res){
 router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
   var year = req.params.year;
   var sending = [];
-   con.query("Select ActorId from Actors where FirstName = ' " + req.params.FirstName1 
-            + "' and LastName = '" + req.params.LastName1 + "' limit one union select ActorId from Actors where FirstName= ' " 
-            + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "' limit one", function(err, rows, fields){
+   con.query("(select ActorId from Actors where FirstName = ' " + req.params.FirstName1 
+            + "' and LastName = '" + req.params.LastName1 + "' limit 1) union (select ActorId from Actors where FirstName= ' " 
+            + req.params.FirstName2 + "' and LastName= '" + req.params.LastName2 + "' limit 1)", function(err, rows, fields){
     if (!err && (rows.length === 2)){
        rows.forEach(function(row){
             sending.push(row["ActorId"]);
@@ -76,10 +76,10 @@ router.get('/decade/:year/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, re
 
 router.get('/director/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
  var sending = [];
-   con.query("select ActorId from Actors A where A.FirstName =' " + req.params.Actor1F 
-            + "' and A.LastName='" + req.params.Actor1L + "' limit one union select ActorId from Actors B where B.FirstName=' " + req.params.Actor2F
-            + "' and B.LastName = '" + req.params.Actor2L + "' limit one union select DirectorId from Directors D where D.FirstName=' " 
-            + req.params.FirstName + "' and D.LastName='" + req.params.LastName + "' limit one", function(err, rows, fields){
+   con.query("(select ActorId from Actors A where A.FirstName =' " + req.params.Actor1F 
+            + "' and A.LastName='" + req.params.Actor1L + "' limit 1) union (select ActorId from Actors B where B.FirstName=' " + req.params.Actor2F
+            + "' and B.LastName = '" + req.params.Actor2L + "' limit 1) union (select DirectorId from Directors D where D.FirstName=' " 
+            + req.params.FirstName + "' and D.LastName='" + req.params.LastName + "' limit 1)", function(err, rows, fields){
     if (!err && (rows.length === 3)){
       rows.forEach(function(row){
             sending.push(row["ActorId"]);
@@ -101,10 +101,10 @@ router.get('/director/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L',
 
 router.get('/writer/:FirstName/:LastName/:Actor1F/:Actor1L/:Actor2F/:Actor2L', function(req, res){
   var sending = [];
-   con.query("select ActorId from Actors A where A.FirstName =' " + req.params.Actor1F 
-            + "' and A.LastName='" + req.params.Actor1L + "' limit one union select ActorId from Actors B where B.FirstName=' " + req.params.Actor2F
-            + "' and B.LastName = '" + req.params.Actor2L + "' limit one union select WriterId from Writers W where W.FirstName=' " 
-            + req.params.FirstName + "' and W.LastName='" + req.params.LastName + "'", function(err, rows, fields){
+   con.query("(select ActorId from Actors A where A.FirstName =' " + req.params.Actor1F 
+            + "' and A.LastName='" + req.params.Actor1L + "' limit 1) union (select ActorId from Actors B where B.FirstName=' " + req.params.Actor2F
+            + "' and B.LastName = '" + req.params.Actor2L + "' limit 1) union (select WriterId from Writers W where W.FirstName=' " 
+            + req.params.FirstName + "' and W.LastName='" + req.params.LastName + "' limit 1)", function(err, rows, fields){
     if (!err && (rows.length === 3)){
       rows.forEach(function(row){
             sending.push(row["ActorId"]);
